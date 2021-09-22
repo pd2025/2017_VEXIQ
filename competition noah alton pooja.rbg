@@ -1,0 +1,146 @@
+<Version>1.0.1</Version>
+
+<ProgrammingBlock type="OneLineLoop" loopType="WaitUntil">
+    <Parameters>
+        <Parameter name="LHS" type="typedef">getJoystickValue(BtnFUp)</Parameter>
+        <Parameter name="operator" type="typedef">==</Parameter>
+        <Parameter name="RHS" type="float">1</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="resetTimer">
+    <Parameters>
+        <Parameter name="currentTimer" type="base typedef" default="T1" typeDef="TTimers">T1</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="loop" loopType="RepeatUntil">
+    <Parameters>
+        <Parameter name="LHS" type="typedef">getTimer(T1, seconds)</Parameter>
+        <Parameter name="operator" type="typedef">&gt;</Parameter>
+        <Parameter name="RHS" type="float">600</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="loop" loopType="IfThen">
+    <Parameters>
+        <Parameter name="LHS" type="typedef">getJoystickValue(BtnFDown)</Parameter>
+        <Parameter name="operator" type="typedef">==</Parameter>
+        <Parameter name="RHS" type="float">1</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="moveMotor">
+    <Parameters>
+        <Parameter name="motorPort" type="base typedef" default="motor10" typeDef="tMotor">armMotor</Parameter>
+        <Parameter name="quantity" type="float" default="1">1</Parameter>
+        <Parameter name="unitType" type="base typedef" default="rotations" typeDef="tMovementUnits">seconds</Parameter>
+        <Parameter name="speed" type="short" default="50">-50</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="moveMotor">
+    <Parameters>
+        <Parameter name="motorPort" type="base typedef" default="motor10" typeDef="tMotor">armMotor</Parameter>
+        <Parameter name="quantity" type="float" default="1">1.21</Parameter>
+        <Parameter name="unitType" type="base typedef" default="rotations" typeDef="tMovementUnits">rotations</Parameter>
+        <Parameter name="speed" type="short" default="50">50</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="stopMotor">
+    <Parameters>
+        <Parameter name="motorPort" type="base typedef" default="motor1" typeDef="tMotor">armMotor</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="setMotorBrakeMode">
+    <Parameters>
+        <Parameter name="nMotorIndex" type="base typedef" typeDef="tMotor">armMotor</Parameter>
+        <Parameter name="nBrakeMode" type="base typedef" typeDef="TMotorBrakeModes">motorHold</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="wait">
+    <Parameters>
+        <Parameter name="quantity" type="float" default="1">.5</Parameter>
+        <Parameter name="unitType" type="base typedef" default="seconds" typeDef="tMovementUnits">seconds</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="else"/>
+
+<ProgrammingBlock type="functionCall" function="tankControl">
+    <Parameters>
+        <Parameter name="rightJoystick" type="base typedef" default="ChD" typeDef="TVexJoysticks">ChD</Parameter>
+        <Parameter name="leftJoystick" type="base typedef" default="ChA" typeDef="TVexJoysticks">ChA</Parameter>
+        <Parameter name="threshold" type="short" default="10">10</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="armControl">
+    <Parameters>
+        <Parameter name="armMotorPort" type="base typedef" default="motor10" typeDef="tMotor">clawMotor</Parameter>
+        <Parameter name="upButton" type="base typedef" default="BtnLUp" typeDef="TVexJoysticks">BtnEUp</Parameter>
+        <Parameter name="downButton" type="base typedef" default="BtnLDown" typeDef="TVexJoysticks">BtnEDown</Parameter>
+        <Parameter name="armSpeed" type="short" default="75">35</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="functionCall" function="armControl">
+    <Parameters>
+        <Parameter name="armMotorPort" type="base typedef" default="motor10" typeDef="tMotor">armMotor</Parameter>
+        <Parameter name="upButton" type="base typedef" default="BtnLUp" typeDef="TVexJoysticks">BtnLUp</Parameter>
+        <Parameter name="downButton" type="base typedef" default="BtnLDown" typeDef="TVexJoysticks">BtnLDown</Parameter>
+        <Parameter name="armSpeed" type="short" default="75">35</Parameter>
+    </Parameters>
+</ProgrammingBlock>
+
+<ProgrammingBlock type="end"/>
+
+<ProgrammingBlock type="end"/>
+
+<ProgrammingBlock type="functionCall" function="stopAllMotors"/>
+
+<RobotConfiguration>#pragma config(Sensor, port2,  distanceMM,     sensorVexIQ_Distance)
+#pragma config(Sensor, port3,  colorDetector,  sensorVexIQ_ColorHue)
+#pragma config(Sensor, port4,  gyroSensor,     sensorVexIQ_Gyro)
+#pragma config(Sensor, port8,  bumpSwitch,     sensorVexIQ_Touch)
+#pragma config(Motor,  motor1,          leftMotor,     tmotorVexIQ, openLoop, driveLeft, encoder)
+#pragma config(Motor,  motor6,          rightMotor,    tmotorVexIQ, openLoop, reversed, driveRight, encoder)
+#pragma config(Motor,  motor10,         armMotor,      tmotorVexIQ, openLoop, encoder)
+#pragma config(Motor,  motor11,         clawMotor,     tmotorVexIQ, openLoop, encoder)
+//*!!Code automatically generated by 'ROBOTC' configuration wizard               !!*//
+</RobotConfiguration>
+
+<CSource>#pragma config(Sensor, port2,  distanceMM,     sensorVexIQ_Distance)
+#pragma config(Sensor, port3,  colorDetector,  sensorVexIQ_ColorHue)
+#pragma config(Sensor, port4,  gyroSensor,     sensorVexIQ_Gyro)
+#pragma config(Sensor, port8,  bumpSwitch,     sensorVexIQ_Touch)
+#pragma config(Motor,  motor1,          leftMotor,     tmotorVexIQ, openLoop, driveLeft, encoder)
+#pragma config(Motor,  motor6,          rightMotor,    tmotorVexIQ, openLoop, reversed, driveRight, encoder)
+#pragma config(Motor,  motor10,         armMotor,      tmotorVexIQ, openLoop, encoder)
+#pragma config(Motor,  motor11,         clawMotor,     tmotorVexIQ, openLoop, encoder)
+//*!!Code automatically generated by 'ROBOTC' configuration wizard               !!*//
+
+
+task main()
+{
+	waitUntil (getJoystickValue(BtnFUp) == 1);
+	resetTimer(T1);
+	repeatUntil (getTimer(T1, seconds) &gt; 600) {
+		if (getJoystickValue(BtnFDown) == 1) {
+			moveMotor(armMotor, 1, seconds, -50);
+			moveMotor(armMotor, 1.21, rotations, 50);
+			stopMotor(armMotor);
+			setMotorBrakeMode(armMotor, motorHold);
+			wait(.5, seconds);
+		} else {
+			tankControl(ChD, ChA, 10);
+			armControl(clawMotor, BtnEUp, BtnEDown, 35);
+			armControl(armMotor, BtnLUp, BtnLDown, 35);
+		}
+	}
+	stopAllMotors();
+}
+</CSource>
